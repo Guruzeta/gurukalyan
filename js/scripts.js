@@ -1,46 +1,49 @@
-// Project Detail Logic
-if (window.location.pathname.includes("project-detail.html")) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const projectId = urlParams.get("id");
+// Project Data
+const projects = {
+    1: { title: "Project Title 1", image: "assets/project1.jpg", description: "Detailed description of Project 1." },
+    2: { title: "Project Title 2", image: "assets/project2.jpg", description: "Detailed description of Project 2." },
+    3: { title: "Project Title 3", image: "assets/project3.jpg", description: "Detailed description of Project 3." }
+};
 
-    const projects = {
-        1: { title: "Project Title 1", image: "assets/project1.jpg", description: "Detailed description of Project 1." },
-        2: { title: "Project Title 2", image: "assets/project2.jpg", description: "Detailed description of Project 2." },
-        3: { title: "Project Title 3", image: "assets/project3.jpg", description: "Detailed description of Project 3." }
-    };
-
-    const project = projects[projectId];
-    if (project) {
-        document.getElementById("project-title").textContent = project.title;
-        document.getElementById("project-image").src = project.image;
-        document.getElementById("project-description").textContent = project.description;
-    }
-}
-
-// Slider Logic
-const slider = document.querySelector('.slide-track');
+// Stack Interaction
+const stackContainer = document.querySelector('.stack-container');
 const cards = document.querySelectorAll('.card');
-const prevBtn = document.querySelector('.prev');
-const nextBtn = document.querySelector('.next');
-let currentIndex = 0;
-const cardWidth = cards[0].offsetWidth + 30; // Card width + margin
+const projectDetails = document.getElementById('project-details');
+const detailTitle = document.getElementById('detail-title');
+const detailImage = document.getElementById('detail-image');
+const detailDescription = document.getElementById('detail-description');
+const closeBtn = document.querySelector('.close-btn');
 
-function updateSlider() {
-    slider.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-}
-
-if (prevBtn && nextBtn) {
-    nextBtn.addEventListener('click', () => {
-        if (currentIndex < cards.length - 3) { // Show 3 cards at a time
-            currentIndex++;
-            updateSlider();
-        }
-    });
-
-    prevBtn.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateSlider();
-        }
+function updateStack() {
+    const scrollPos = stackContainer.scrollTop;
+    cards.forEach((card, index) => {
+        const cardOffset = index * 100 - scrollPos / 2; // Adjusts spacing and scroll sensitivity
+        card.style.transform = `rotate(-10deg) translateZ(${cardOffset}px) translateY(${cardOffset}px)`;
+        card.style.opacity = Math.max(0.3, 1 - Math.abs(cardOffset) / 200);
     });
 }
+
+stackContainer.addEventListener('scroll', updateStack);
+updateStack(); // Initial positioning
+
+// Card Selection
+cards.forEach(card => {
+    card.addEventListener('click', () => {
+        const id = card.getAttribute('data-id');
+        const project = projects[id];
+        
+        detailTitle.textContent = project.title;
+        detailImage.src = project.image;
+        detailDescription.textContent = project.description;
+        
+        projectDetails.style.display = 'block';
+        cards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+    });
+});
+
+// Close Details
+closeBtn.addEventListener('click', () => {
+    projectDetails.style.display = 'none';
+    cards.forEach(c => c.classList.remove('active'));
+});
