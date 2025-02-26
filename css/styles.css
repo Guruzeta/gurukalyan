@@ -23,14 +23,16 @@ body {
 /* Stack Container */
 .stack-container {
     position: relative;
-    height: 80vh;
+    height: 100vh; /* Full viewport height */
+    max-width: 800px; /* Constrain width for centering */
+    margin: 0 auto; /* Center horizontally */
     overflow-y: auto;
     overflow-x: hidden;
-    scrollbar-width: none; /* Hide scrollbar in Firefox */
+    scrollbar-width: none;
 }
 
 .stack-container::-webkit-scrollbar {
-    display: none; /* Hide scrollbar in Chrome/Safari */
+    display: none;
 }
 
 .project-stack {
@@ -39,6 +41,7 @@ body {
     flex-direction: column;
     align-items: center;
     transform-style: preserve-3d;
+    padding: 300px 0; /* Extra padding to ensure cards don’t clip at top/bottom */
 }
 
 /* Card Styling */
@@ -46,7 +49,7 @@ body {
     position: relative;
     width: 300px;
     height: 300px;
-    margin: -200px 0; /* Overlap cards */
+    margin: -150px 0; /* Reduced overlap to prevent clipping */
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid #00d4ff;
     border-radius: 10px;
@@ -157,7 +160,7 @@ body {
     color: #0a0a0a;
 }
 
-/* Homepage (updated for consistency) */
+/* Homepage (unchanged but consistent) */
 .homepage {
     height: 100vh;
     display: flex;
