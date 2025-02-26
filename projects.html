@@ -9,37 +9,33 @@
 <body>
     <div class="projects-page">
         <h1>Projects</h1>
-        <div class="slider-container">
-            <button class="slider-btn prev">←</button>
-            <div class="slider">
-                <div class="slide-track">
-                    <div class="card">
-                        <a href="project-detail.html?id=1">
-                            <img src="assets/project1.jpg" alt="Project 1">
-                            <div class="card-content">
-                                <h3>Project Title 1</h3>
-                            </div>
-                        </a>
+        <div class="stack-container">
+            <div class="project-stack">
+                <div class="card" data-id="1">
+                    <img src="assets/project1.jpg" alt="Project 1">
+                    <div class="card-content">
+                        <h3>Project Title 1</h3>
                     </div>
-                    <div class="card">
-                        <a href="project-detail.html?id=2">
-                            <img src="assets/project2.jpg" alt="Project 2">
-                            <div class="card-content">
-                                <h3>Project Title 2</h3>
-                            </div>
-                        </a>
+                </div>
+                <div class="card" data-id="2">
+                    <img src="assets/project2.jpg" alt="Project 2">
+                    <div class="card-content">
+                        <h3>Project Title 2</h3>
                     </div>
-                    <div class="card">
-                        <a href="project-detail.html?id=3">
-                            <img src="assets/project3.jpg" alt="Project 3">
-                            <div class="card-content">
-                                <h3>Project Title 3</h3>
-                            </div>
-                        </a>
+                </div>
+                <div class="card" data-id="3">
+                    <img src="assets/project3.jpg" alt="Project 3">
+                    <div class="card-content">
+                        <h3>Project Title 3</h3>
                     </div>
                 </div>
             </div>
-            <button class="slider-btn next">→</button>
+        </div>
+        <div class="project-details" id="project-details">
+            <h2 id="detail-title"></h2>
+            <img id="detail-image" src="" alt="Project Image">
+            <p id="detail-description"></p>
+            <button class="close-btn">Close</button>
         </div>
         <a href="index.html" class="btn">Back to Home</a>
     </div>
