@@ -16,10 +16,14 @@ const closeBtn = document.querySelector('.close-btn');
 
 function updateStack() {
     const scrollPos = stackContainer.scrollTop;
+    const containerHeight = stackContainer.clientHeight;
+    const centerOffset = containerHeight / 2; // Center of viewport
+
     cards.forEach((card, index) => {
-        const cardOffset = index * 100 - scrollPos / 2; // Adjusts spacing and scroll sensitivity
-        card.style.transform = `rotate(-10deg) translateZ(${cardOffset}px) translateY(${cardOffset}px)`;
-        card.style.opacity = Math.max(0.3, 1 - Math.abs(cardOffset) / 200);
+        const cardOffset = (index * 150) - scrollPos; // Match CSS margin
+        const zDepth = Math.min(200, Math.max(-200, centerOffset - cardOffset - 150)); // Cap depth for visibility
+        card.style.transform = `rotate(-10deg) translateZ(${zDepth}px) translateY(${cardOffset}px)`;
+        card.style.opacity = Math.max(0.3, 1 - Math.abs(zDepth) / 300); // Fade based on distance from center
     });
 }
 
